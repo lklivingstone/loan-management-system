@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: api
+    restart: unless-stopped
+    image: api-prod:1.0.0
+    build:
+      context: api
+      target: production
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    networks:
+      - shared-network
+
+  client:
+    container_name: client
+    restart: unless-stopped
+    image: client-prod:1.0.0
+    build:
+      context: client
+      target: production
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - shared-network
+    depends_on:
+      - api
+
+networks:
+  shared-network:
