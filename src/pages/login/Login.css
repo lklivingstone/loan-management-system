@@ -1,0 +1,33 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    flex: 1;
+    min-width: 40%;
+    margin: 10px;
+    padding: 10px;
+}
+
+.forgot-password {
+    margin: 5px 10px;
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.register-link {
+    margin: 5px 10px;
+    font-size: 12px;
+    text-decoration: underline;
+    color: #edf5e1;
+    cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+  
