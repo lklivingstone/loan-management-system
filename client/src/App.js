@@ -16,15 +16,16 @@ function App() {
   const user = useSelector((state)=>state.user_details.user)
 
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* <Route exact path="/" element= { user ? <Home /> : <Navigate to="/login" replace/>} /> */}
-        <Route exact path="/" element= {<Home />} />
-        <Route path="/login" element= {user ? <Navigate to="/" replace /> :  <Login />} />
-        <Route path="/logout" element= {user ? <Logout /> : <Navigate to="/" replace />} />
-        <Route path="/register" element= {user ?<Navigate to="/" replace /> :  <Register />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element= { user ? <Home /> : <Navigate to="/login" replace/>} />
+          <Route path="/login" element= {user ? <Navigate to="/" replace /> :  <Login />} />
+          <Route path="/logout" element= {user ? <Logout /> : <Navigate to="/" replace />} />
+          <Route path="/register" element= {user ?<Navigate to="/" replace /> :  <Register />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

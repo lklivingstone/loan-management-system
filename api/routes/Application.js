@@ -1,5 +1,4 @@
-const Sheet = require("../models/Sheet")
-const { verifyToken, verifyTokenAndAuthorization, verifyTokenForAdmin } = require("../jwt/Verification")
+const { verifyToken } = require("../jwt/Verification")
 
 const router= require("express").Router()
 
@@ -12,7 +11,6 @@ router.post("/", verifyToken, async (req, res)=> {
         let profit = 0;
         let asset = 0;
 
-        // Iterate through the sheet array and sum the values
         sheet.forEach(item => {
             profit += item.profitOrLoss;
             asset += item.assetsValue;
@@ -27,7 +25,7 @@ router.post("/", verifyToken, async (req, res)=> {
             preAssessment = 100;
         }
         const approvedAmount = ( preAssessment * details.loanAmount ) / 100;
-
+        
         res.status(200).json({    
             message : "Approaved Load Amount",
             code : 200, 

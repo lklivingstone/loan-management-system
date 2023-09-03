@@ -9,6 +9,7 @@ import "./Home.css";
 import { Result } from "../../components/result/Result";
 import { applicationSubmission, balanceSheetRequest } from "../../api/RequestMethods";
 import { BalanceSheet } from "../../components/balanceSheet/BalanceSheet";
+import Navbar from "../../components/navbar/Navbar";
 
 
 const Home = () => {
@@ -24,13 +25,57 @@ const Home = () => {
     const [ provider, setProvider ] = useState("");
     const [ sheet, setSheet ] = useState([]);
     const [ approvedAmount, setApprovedAmount ] = useState([]);
+    const [ error, setError ] = useState("");
 
     const prevStep = () => {
-        setStep(step - 1)
+        if (step == 3) {
+            setName("")
+            setContact("")
+            setAddress("")
+            setYear()
+            setAmount()
+            setProvider("")
+            setStep(1)
+        }
+        else if (step == 4) {
+            setName("")
+            setContact("")
+            setAddress("")
+            setYear()
+            setAmount()
+            setProvider("")
+            setStep(1)
+        }
+        else {
+            setStep(step - 1)
+        }
     }
 
     const nextStep = () => {
-        setStep(step + 1)
+        if (step === 1) {
+            if (name && contact && address && !isNaN(year) && !isNaN(amount)) {
+                setError("");
+                setStep(step + 1)
+            }
+            else if (isNaN(year) || isNaN(amount)) {
+                setError("Fill all the details Correctly")
+            }
+            else {
+                setError("Fill all the details ")
+            }
+        }
+        else if (step === 2) {
+            if (provider) {
+                setError("");
+                setStep(step + 1)
+            }
+            else {
+                setError("Select a Provider")
+            }
+        }
+        else {
+            setStep(step+1)
+        }
     }
 
     const handleNameChange = (e) => {
@@ -97,17 +142,25 @@ const Home = () => {
     }
 
     return (
+        <>
+        <Navbar />
         <FormCard>
             {
                 step === 1 ? 
                 <>
                     <h2>BUSINESS DETAILS</h2>
                     <BusinessDetails 
-                        handleNameChange={handleNameChange}
-                        handleContactChange={handleContactChange}
-                        handleAddressChange={handleAddressChange}
-                        handleYearChange={handleYearChange}
-                        handleAmountChange={handleAmountChange} 
+                        handleNameChange = {handleNameChange}
+                        handleContactChange = {handleContactChange}
+                        handleAddressChange = {handleAddressChange}
+                        handleYearChange = {handleYearChange}
+                        handleAmountChange = {handleAmountChange} 
+                        name = {name}
+                        contact = {contact}
+                        address = {address}
+                        year = {year}
+                        amount = {amount}
+                        provider = {provider}
                     >
                     </BusinessDetails> 
                     <div className="button-container">
@@ -115,6 +168,10 @@ const Home = () => {
                             label="Next"
                             onClick={nextStep}
                         />
+                        {
+                            error && 
+                            <p className="error">{error}</p>
+                        }
                     </div>
                 </>
                 : null
@@ -135,6 +192,10 @@ const Home = () => {
                             label="Request Balance Sheet"
                             onClick={handleBalanceSheetRequest}
                         />
+                        {
+                            error && 
+                            <p className="error">{error}</p>
+                        }
                     </div>
                 </>
                 : null
@@ -142,6 +203,10 @@ const Home = () => {
             {
                 step === 3 ? 
                 <>
+                    <ArrowBackIcon 
+                        className = "back-button"
+                        onClick={prevStep}
+                    />
                     <h2>Balance Sheet:</h2>
                     <BalanceSheet 
                         sheet={sheet}
@@ -158,6 +223,10 @@ const Home = () => {
             {
                 step === 4 ? 
                 <>
+                    <ArrowBackIcon 
+                        className = "back-button"
+                        onClick={prevStep}
+                    />
                     <Result
                         approvedAmount = {approvedAmount}
                     >
@@ -167,6 +236,7 @@ const Home = () => {
                 : null
             }
         </FormCard>
+        </>
     )
 }
 
