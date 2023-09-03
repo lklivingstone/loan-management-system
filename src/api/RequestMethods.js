@@ -51,7 +51,6 @@ export const register = async (user) => {
 
 export const balanceSheetRequest = async (token) => {
     try{
-        // console.log(token)
         const config = {
             headers: {
                 auth: `Bearer ${token}`
@@ -75,7 +74,6 @@ export const balanceSheetRequest = async (token) => {
 
 export const applicationSubmission = async ({sheet, details, token}) => {
     try{
-        console.log(sheet, details, token)
         const config = {
             data : {
                 sheet : sheet,
@@ -96,8 +94,6 @@ export const applicationSubmission = async ({sheet, details, token}) => {
             data: response.data
         }
     }catch(err) {
-        console.log(err)
-
         return {
             status: 400,
             message: err['response']['data']

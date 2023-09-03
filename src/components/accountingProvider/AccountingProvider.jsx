@@ -6,8 +6,9 @@ export const AccountingProvider = ({ handleProviderChange }) => {
   return (
     <div className="container">
         <select className="select" onChange={(e) => handleProviderChange(e)}>
-            <option>Xero</option>
-            <option>MYOB</option>
+          <option value="">--</option>
+          <option>Xero</option>
+          <option>MYOB</option>
         </select>
     </div>
   );

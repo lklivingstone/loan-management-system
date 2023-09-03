@@ -7,3 +7,9 @@
 .back-button {
     cursor: pointer;
 }
+
+.error {
+    color: #9d1010;
+    text-align: left;
+    margin-top: 0.25rem;
+}
