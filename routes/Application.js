@@ -27,7 +27,7 @@ router.post("/", verifyToken, async (req, res)=> {
             preAssessment = 100;
         }
         const approvedAmount = ( preAssessment * details.loanAmount ) / 100;
-
+        
         res.status(200).json({    
             message : "Approaved Load Amount",
             code : 200, 
